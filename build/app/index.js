@@ -12,12 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const app_1 = __importDefault(require("./app"));
-const run = () => __awaiter(void 0, void 0, void 0, function* () {
-    const app = yield (0, app_1.default)();
-    const PORT = 4000;
-    app.listen(PORT, () => {
-        console.log("Server is running on port", PORT);
+exports.default = graphqlServer;
+const server_1 = require("@apollo/server");
+const express4_1 = require("@apollo/server/express4");
+const express_1 = __importDefault(require("express"));
+function graphqlServer() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const app = (0, express_1.default)();
+        const server = new server_1.ApolloServer({
+            typeDefs: `
+    type Query {
+    hello: String
+  }`,
+            resolvers: {},
+        });
+        yield server.start();
+        app.use('/graphql', express_1.default.json(), (0, express4_1.expressMiddleware)(server));
+        return app;
     });
-});
-run();
+}
