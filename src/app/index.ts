@@ -3,18 +3,12 @@ import { expressMiddleware } from '@apollo/server/express4';
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
 import { users } from './users';
+import { prismaClient } from './client/db';
 
 export default async function graphqlServer() {
-// console.log(users)
-const app = express();
 
-// const prisma = new PrismaClient()
-// const newUser = await prisma.user.create({
-//   data: {
-//     name: 'Alice',
-//     email: 'alice@prisma.io',
-//   },
-// })
+const app = express();
+prismaClient;
 
 const server = new ApolloServer({
   typeDefs:`
