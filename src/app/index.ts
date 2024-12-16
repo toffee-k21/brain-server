@@ -34,7 +34,8 @@ app.use('/graphql',
   expressMiddleware(server,
     {context:async({req,res})=>{
   return {
-    user: req.headers.authorization ? JWTService.decodeToken(req.headers.authorization) : null
+    user: req.headers.authorization ? 
+    JWTService.decodeToken(req.headers.authorization.split("Bearer ")[1]) : null
   }
   }}));
 return app;
