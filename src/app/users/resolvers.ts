@@ -31,7 +31,8 @@ const queries = {
         return userToken;
     },
     getCurrentUser: async(_:any,{}:any,context:any) =>{
-        if(context.user == null ) throw new Error('User not found');
+        if(context.user == null ) return null;
+
         const user = await prismaClient.user.findUnique({where : {id : context.user.id}});
         return user;
     }

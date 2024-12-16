@@ -16,6 +16,7 @@ class JWTService {
         return token;
     }
     public static decodeToken(token: string){
+        if(token == null) return;
         return JWT.verify(token,JWT_SECRET as string);
     }
 }
