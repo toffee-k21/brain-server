@@ -20,4 +20,15 @@ model user {
   proflieImgURL String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  thoughts  thought[]
+}
+
+model thought {
+  id        String    @id @default(cuid())
+  content   String
+  authorId  String 
+  author    user      @relation(fields: [authorId], references: [id])
+  private  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }

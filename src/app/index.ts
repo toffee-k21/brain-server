@@ -6,6 +6,7 @@ import { users } from './users';
 import { prismaClient } from './client/db';
 import cors from 'cors';
 import JWTService from './services/jwt';
+import { thoughts } from './thoughts';
 
 
 export default async function graphqlServer() {
@@ -17,14 +18,22 @@ prismaClient;
 const server = new ApolloServer({
   typeDefs:`
   ${users.types}
+  ${thoughts.types}
+
 
   type Query {
    ${users.queries}
+   ${thoughts.queries}
+
 }`,
   resolvers: {
     Query:{
-    ...users.resolvers.queries}
+    ...users.resolvers.queries,...thoughts.resolvers.queries},
+    Thought :{
+      user: thoughts.resolvers.userquery()
+    }
   },
+ 
 });
 
 await server.start();
