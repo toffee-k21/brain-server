@@ -19,19 +19,27 @@ const server = new ApolloServer({
   typeDefs:`
   ${users.types}
   ${thoughts.types}
-
+  
 
   type Query {
    ${users.queries}
    ${thoughts.queries}
+  }
 
-}`,
+  type Mutation {
+    ${thoughts.mutations}
+  }
+   
+`,
   resolvers: {
     Query:{
     ...users.resolvers.queries,...thoughts.resolvers.queries},
+    Mutation:{
+      ...thoughts.resolvers.mutations
+    },
     Thought :{
       user: thoughts.resolvers.userquery()
-    }
+    },
   },
  
 });
