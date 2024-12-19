@@ -1,7 +1,8 @@
 export const types = `#graphql
 
 input ThoughtInput {
-  content: String
+  content: String!,
+  private: Boolean
 }
 
 type Thought {

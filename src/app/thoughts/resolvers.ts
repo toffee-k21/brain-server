@@ -15,6 +15,12 @@ const queries = {
       return result;
     }
 
+},
+exploreThoughts: async (parent: any, args: any, context: any) => {
+  const result = await prismaClient.thought.findMany({
+    where: { private : false }
+  });
+  return result;
 }
 }
 
@@ -38,6 +44,7 @@ const mutations ={
       const result = await prismaClient.thought.create({
         data:{
           content: payload.content,
+          private: payload.private,
           authorId: context.user.id
         }
       })

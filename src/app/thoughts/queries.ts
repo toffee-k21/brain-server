@@ -1,3 +1,4 @@
 export const queries = `#graphql
-getThoughts: [Thought]
+getThoughts: [Thought],
+exploreThoughts: [Thought],
 `
